@@ -1,0 +1,38 @@
+{
+    "authorization": {
+        "brand": "card-brand",
+        "ns": 1642390488673063901,
+        "uid": "atz-1dinheadtd4ut"
+    },
+    "currency": {
+        "amount100": 100000,
+        "code3": "EUR"
+    },
+    "ok": true,
+    "state": {
+        "action": "authorize",
+        "data_fields": [
+            "ok",
+            "state",
+            "authorization",
+            "currency"
+        ],
+        "log": {
+            "authorization": {
+                "brand": "card-brand",
+                "ns": 1642390488673063901,
+                "uid": "atz-1dinheadtd4ut"
+            },
+            "authorized": {
+                "amount100": 100000,
+                "code3": "EUR"
+            },
+            "available": {
+                "amount100": 100000,
+                "code3": "EUR"
+            }
+        },
+        "ok": true,
+        "uid": "cf3ec1234g34g1gj"
+    }
+}

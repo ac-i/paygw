@@ -1,0 +1,12 @@
+{
+    "action": "capture",
+    "authorization": {
+        "brand": "card-brand",
+        "uid": "card-authorization-uid"
+    },
+    "currency": {
+        "amount100": 10000,
+        "code3": "EUR"
+    },
+    "uid": "uid-transaction-indepotency"
+}

@@ -1,0 +1,147 @@
+// 
+syntax = "proto3";
+
+package proto.paycard;
+// import "paygw/proto/paycard/msg.proto";
+
+// import "google/api/annotations.proto";
+// import "google/protobuf/any.proto";
+// import "google/protobuf/duration.proto";
+// import "google/protobuf/empty.proto";
+// import "google/protobuf/struct.proto";
+// import "google/protobuf/timestamp.proto";
+
+import "paygw/proto/app/msg.proto";
+import "paygw/proto/card/msg.proto";
+import "paygw/proto/currency/msg.proto";
+// import "paygw/proto/err/msg.proto";
+import "paygw/proto/party/msg.proto";
+
+option go_package = "paygw/proto/paycard";
+
+// 
+message Authorization {
+  // ~ idempotency
+  string uid = 1;
+  // authorize|+state
+  string action = 2;
+  // 
+  proto.party.Party party = 3;
+  // 
+  proto.app.BasicAuth basic_auth = 4;
+  // 
+  proto.card.Card card = 5;
+  // 
+  proto.currency.Currency currency = 6;
+}
+
+// 
+message AuthorizationState {
+  // 
+  bool ok = 1;
+  // 
+  State state = 2;
+  // 
+  proto.card.Authorization authorization = 3;
+  // 
+  proto.currency.Currency currency = 4;
+}
+
+// 
+message Transaction {
+  // ~ idempotency
+  string uid = 1;
+  // capture|void|refund|+state
+  string action = 2;
+  // 
+  proto.card.Authorization authorization = 3;
+  // requested
+  proto.currency.Currency currency = 4;
+}
+
+// 
+message TransactionState {
+  // 
+  bool ok = 1;
+  // 
+  State state = 2;
+  // available
+  proto.currency.Currency available = 3;
+}
+
+// 
+message State {
+  // 
+  bool ok = 1;
+  // ~ idempotency
+  string uid = 2;
+  // 
+  string action = 3;
+  // 0 OK; error > 0
+  int32 code = 4;
+  // message (on error)
+  string message = 5;
+  // 
+  repeated string data_fields = 6;
+  // 
+  TransactionLog log = 7;
+}
+
+// 
+message TransactionLog {
+  // 
+  proto.card.Authorization authorization = 1;
+  // authorized
+  proto.currency.Currency authorized = 2;
+  // available
+  proto.currency.Currency available = 3;
+  // 
+  proto.currency.Log100 capture = 4;
+  // 
+  proto.currency.Log100 refund = 5;
+  // time ns
+  int64 void = 6;
+  // time ns
+  int64 expire = 7;
+}
+
+// -H "Idempotency-Key: nZuG7upL4D47umtI"
+// https://stripe.com/docs/idempotency
+
+/*
+Endpoints
+● /authorize
+○ Input
+■ Credit card data
+■ Card number
+■ Expiry month and date
+■ CVV
+○ Amount and currency
+○ Output
+■ Unique ID
+■ Success or error
+■ Amount and currency available
+●
+●
+●
+/capture
+○ Input
+■ Authorization unique ID
+■ Amount
+○ Output
+■ Success or error
+■ Amount and currency available
+/void
+○ Input
+■ Authorization unique ID
+○ Output
+■ Success or error
+■ Amount and currency available
+/refund
+○ Input
+■ Authorization unique ID
+■ Amount
+○ Output
+○ Success or error
+○ Amount and currency available
+*/

@@ -1,0 +1,42 @@
+{
+    "available": {
+        "amount100": 90000,
+        "code3": "EUR"
+    },
+    "ok": true,
+    "state": {
+        "action": "capture",
+        "data_fields": [
+            "ok",
+            "state",
+            "currency"
+        ],
+        "log": {
+            "authorization": {
+                "brand": "card-brand",
+                "ns": 1642383345460604070,
+                "uid": "authorization-uid"
+            },
+            "authorized": {
+                "amount100": 100000,
+                "code3": "EUR"
+            },
+            "available": {
+                "amount100": 90000,
+                "code3": "EUR"
+            },
+            "capture": {
+                "amounts": [
+                    10000
+                ],
+                "count": 1,
+                "ns": [
+                    1642383946386219991
+                ],
+                "sum": 10000
+            }
+        },
+        "ok": true,
+        "uid": "uid-transaction-indepotency"
+    }
+}

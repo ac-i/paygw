@@ -1,0 +1,52 @@
+{
+    "active": 1,
+    "environment": {
+        "active": 1,
+        "app_host": "ei750",
+        "app_mode": 4,
+        "app_name": "paygw",
+        "app_pid": 299733,
+        "app_start": 1642372578889750402,
+        "servers": [
+            "grpc",
+            "restgw"
+        ],
+        "storages": [
+            "mem"
+        ]
+    },
+    "server": {
+        "active": 1,
+        "cli_grpc": {
+            "active": 1,
+            "driver": "grpc",
+            "target": ":8090"
+        },
+        "serv_grpc": {
+            "active": 1,
+            "address": ":8090",
+            "driver": "grpc",
+            "network": "tcp",
+            "storage": {
+                "active": 1,
+                "drivers": {
+                    "mem": {
+                        "active": 1,
+                        "driver": "mem"
+                    }
+                }
+            }
+        },
+        "serv_rest": {
+            "active": -1,
+            "driver": "rest",
+            "rest_addr": ":8070"
+        },
+        "serv_restgw": {
+            "active": 1,
+            "driver": "restgw",
+            "grpc_endpoint": ":8090",
+            "restgw_addr": ":8080"
+        }
+    }
+}

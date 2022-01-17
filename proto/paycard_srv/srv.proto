@@ -1,0 +1,75 @@
+// 
+syntax = "proto3";
+
+package proto.paycard_srv;
+// import "paygw/proto/paycard_srv/srv.proto";
+
+import "google/api/annotations.proto";
+// import "google/protobuf/any.proto";
+// import "google/protobuf/duration.proto";
+// import "google/protobuf/empty.proto";
+// import "google/protobuf/struct.proto";
+// import "google/protobuf/timestamp.proto";
+
+import "paygw/proto/paycard/msg.proto";
+
+option go_package = "paygw/proto/paycard_srv";
+
+// PayCardService (PayCard Domain Service)
+service PayCardService {
+
+  // POST /authorize
+  rpc Authorize(proto.paycard.Authorization) returns (proto.paycard.AuthorizationState) {
+    option (google.api.http) = {
+        post: "/authorize"
+        body: "*"
+    };
+  }
+
+  // POST /process/capture|void|refund|+state
+  rpc Process(proto.paycard.Transaction) returns (proto.paycard.TransactionState) {
+    option (google.api.http) = {
+        post: "/process/{action}"
+        body: "*"
+    };
+  }
+  
+}
+
+/*
+Endpoints
+● /authorize
+○ Input
+■ Credit card data
+■ Card number
+■ Expiry month and date
+■ CVV
+○ Amount and currency
+○ Output
+■ Unique ID
+■ Success or error
+■ Amount and currency available
+●
+●
+●
+/capture
+○ Input
+■ Authorization unique ID
+■ Amount
+○ Output
+■ Success or error
+■ Amount and currency available
+/void
+○ Input
+■ Authorization unique ID
+○ Output
+■ Success or error
+■ Amount and currency available
+/refund
+○ Input
+■ Authorization unique ID
+■ Amount
+○ Output
+○ Success or error
+○ Amount and currency available
+*/

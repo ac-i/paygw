@@ -1,0 +1,40 @@
+// 
+syntax = "proto3";
+
+package proto.card;
+// import "paygw/proto/card/msg.proto";
+
+// import "google/api/annotations.proto";
+// import "google/protobuf/any.proto";
+// import "google/protobuf/duration.proto";
+// import "google/protobuf/empty.proto";
+// import "google/protobuf/struct.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "paygw/proto/card";
+
+// 
+message Card {
+  // 
+  string brand = 1;
+  // 
+  string number = 2;
+  // 
+  string exp_month = 3;
+  // 
+  string exp_year = 4;
+  // 
+  repeated string names = 5;
+  // 
+  string cvc = 6;
+}
+
+// 
+message Authorization {
+  // 
+  string brand = 1;
+  // 
+  string uid = 2;
+  // 
+  int64 ns = 3;
+}

@@ -1,0 +1,24 @@
+// 
+syntax = "proto3";
+
+package proto.party;
+// import "paygw/proto/party/msg.proto";
+
+// import "google/api/annotations.proto";
+// import "google/protobuf/any.proto";
+// import "google/protobuf/duration.proto";
+// import "google/protobuf/empty.proto";
+// import "google/protobuf/struct.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "paygw/proto/party";
+
+// 
+message Party {
+  // 
+  string uid = 1;
+  // 
+  string name = 2;
+  // bank, merchant, customer ...
+  string role = 3;
+}

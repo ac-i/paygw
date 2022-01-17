@@ -1,0 +1,27 @@
+{
+    "basic_auth": {
+        "password": "merchant-pasw",
+        "username": "merchant-user"
+    },
+    "card": {
+        "brand": "card-brand",
+        "cvc": "card-cvc",
+        "exp_month": "card-mm",
+        "exp_year": "card-yy",
+        "names": [
+            "card-user",
+            "card-user-com"
+        ],
+        "number": "card-number"
+    },
+    "currency": {
+        "amount100": 100000,
+        "code3": "EUR"
+    },
+    "party": {
+        "name": "name-party",
+        "role": "role-party-merchant",
+        "uid": "uid-party"
+    },
+    "uid": "cf3ec1234g34g1gj"
+}

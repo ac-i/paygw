@@ -1,0 +1,22 @@
+// 
+syntax = "proto3";
+
+package proto.err;
+// import "paygw/proto/err/msg.proto";
+
+// import "google/api/annotations.proto";
+// import "google/protobuf/any.proto";
+// import "google/protobuf/duration.proto";
+// import "google/protobuf/empty.proto";
+// import "google/protobuf/struct.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "paygw/proto/err";
+
+// 
+message Err {
+  // 
+  int32 code = 1;
+  // 
+  string message = 2;
+}

@@ -1,0 +1,170 @@
+// 
+syntax = "proto3";
+
+package proto.app;
+// import "paygw/proto/app/msg.proto";
+
+// import "google/api/annotations.proto";
+// import "google/protobuf/any.proto";
+// import "google/protobuf/duration.proto";
+// import "google/protobuf/empty.proto";
+// import "google/protobuf/struct.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "paygw/proto/app";
+
+// Config configures app instance
+message Config {
+  // 
+  Environment environment  = 1;
+  // 
+  int32 active = 2;
+  // 
+  Server server  = 3;
+}
+
+// App runtime environment context
+message Environment {
+  // 
+  int32 active = 1;
+  // 
+  string app_name = 2;
+  // 
+  AppMode app_mode = 3;
+  // 
+  string app_host = 4;
+  // 
+  int32 app_pid = 5;
+  // 
+  int64 app_start = 6;
+  // Activate Servers & Storages [grpc restgw rest]
+  repeated string servers = 7;
+  // Activate Storages [mem grpc aql cql]
+  repeated string storages = 8;
+}
+
+// Domain Server
+message Server {
+  // 
+  int32 active = 1;
+  // 
+  ServGRPC serv_grpc = 2;
+  // 
+  ServRESTGW serv_restgw = 3;
+  // 
+  ServREST serv_rest = 4; // unimplemented
+  // 
+  CliGRPC cli_grpc = 5;
+}
+
+// 
+message CliGRPC {
+  // 
+  int32 active = 1;
+  // 
+  string driver = 2;
+  // grpc.DialContext(ctx context.Context, target string, opts ...grpc.DialOption) (conn *grpc.ClientConn, err error)
+  string target = 3;
+}
+
+// 
+message ServGRPC {
+  // 
+  int32 active = 1;
+  // 
+  string driver = 2;
+  // Listen(network string, address string)
+  string network = 3;
+  // Listen(network string, address string)
+  string address = 4;
+  // serv storage in ServGRPC only
+  // map<string, StorageDriver> storage_drivers = 5;
+  // serv storage in ServGRPC only
+  Storage storage = 5;
+}
+
+// 
+message ServRESTGW {
+  // 
+  int32 active = 1;
+  // 
+  string driver = 2;
+  // RegisterPortServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption)
+  string grpc_endpoint = 3;
+  // http.Server struct { Addr string
+  string restgw_addr = 4;
+}
+
+// 
+message ServREST {
+  // 
+  int32 active = 1;
+  // 
+  string driver = 2;
+  // http.Server struct { Addr string
+  string rest_addr = 3;
+}
+
+// Storage
+message Storage {
+  // 
+  int32 active = 1;
+  // serv storage in ServGRPC only
+  map<string, StorageDriver> drivers = 2;
+  // serv storage in ServGRPC only
+  // map<string, StorageDriver> connections = 3;
+}
+
+// 
+message StorageDriver {
+  // 
+  int32 active = 1;
+  // 
+  string driver = 2;
+  // 
+  repeated string hosts = 3;
+  // 
+  BasicAuth auth = 4;
+}
+
+// 
+message BasicAuth {
+  // 
+  int32 active = 1;
+  // 
+  string driver = 2;
+  // 
+  string username = 3;
+  // 
+  string password = 4;
+}
+
+// App runtime mode
+enum AppMode {
+  // 
+  APP_MODE_UNSPECIFIED = 0;
+  // 
+  APP_MODE_PROD = 1;
+  // 
+  APP_MODE_STAGE = 2;
+  // 
+  APP_MODE_TEST = 3;
+  // 
+  APP_MODE_DEV = 4;
+  // 
+  APP_MODE_FREE = 5;
+}
+
+// App domain
+enum AppDom {
+  // 
+  APP_DOM_UNSPECIFIED = 0;
+  // 
+  APP_DOM_ALL = 1;
+  // 
+  APP_DOM_PAYCARD = 2;
+  // 
+  APP_DOM_PORT = 3;
+  // 
+  APP_DOM_STORE = 4;
+}

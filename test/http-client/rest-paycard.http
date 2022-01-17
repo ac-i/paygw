@@ -1,0 +1,60 @@
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+# https://httpyac.github.io/guide/request.html
+
+
+@baseUrl = http://localhost:8080
+# @baseUrl = http://localhost:8081
+
+
+###
+# @name authorize
+POST {{baseUrl}}/authorize
+
+{
+    "basic_auth": {
+        "password": "merchant-pasw",
+        "username": "merchant-user"
+    },
+    "card": {
+        "brand": "card-brand",
+        "cvc": "card-cvc",
+        "exp_month": "card-mm",
+        "exp_year": "card-yy",
+        "names": [
+            "card-user",
+            "card-user-com"
+        ],
+        "number": "card-number"
+    },
+    "currency": {
+        "amount100": 100000,
+        "code3": "EUR"
+    },
+    "party": {
+        "name": "name-party",
+        "role": "role-party-merchant",
+        "uid": "uid-party"
+    },
+    "uid": "cf3ec1234g34g1gj"
+}
+
+
+###
+# /process/capture|void|refund|+state
+# @name process_capture
+POST {{baseUrl}}/process/capture
+
+{
+     "authorization": {
+        "brand": "card-brand",
+        "uid": "atz-1dinhh7fip1no",
+        "ns": "1642390588587017976"
+      },
+    "currency": {
+        "amount100": 10000,
+        "code3": "EUR"
+    },
+    "uid": "uid-transaction-indepotency"
+}
+
+###

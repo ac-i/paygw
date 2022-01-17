@@ -1,0 +1,36 @@
+// 
+syntax = "proto3";
+
+package proto.currency;
+// import "paygw/proto/currency/msg.proto";
+
+// import "google/api/annotations.proto";
+// import "google/protobuf/any.proto";
+// import "google/protobuf/duration.proto";
+// import "google/protobuf/empty.proto";
+// import "google/protobuf/struct.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "paygw/proto/currency";
+
+// 
+message Currency {
+  // 
+  string code3 = 1;
+  // 
+  int64 amount100 = 3;
+}
+
+// 
+message Log100 {
+  // sum amount100
+  int64 sum = 1;
+  // 
+  int32 count = 2;
+  // amount100
+  repeated int64 amounts = 3;
+  // received at ns
+  repeated int64 ns = 4;
+  // merchant transaction uid
+  // repeated int64 uids = 5;
+}

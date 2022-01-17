@@ -1,0 +1,26 @@
+{
+    "protoc": {
+        // "path": "${env.HOME}/pb/bin/protoc",
+        "path": "/usr/local/bin/protoc",
+        // "compile_on_save": true,
+        "options": [
+            "--proto_path=.",
+            // "--proto_path=${workspaceFolder}",
+            
+            // "--proto_path=${env.HOME}/pb/include",
+            "--proto_path=${env.HOME}/ga/ac.io/",
+            // "--proto_path=${env.HOME}",
+            "--proto_path=/usr/local/include/",
+            "--proto_path=${env.HOME}/gh/googleapis/googleapis/",
+            // 
+            "--go_out=paths=source_relative:..",
+            "--go-grpc_out=paths=source_relative:../",
+            "--grpc-gateway_out=paths=source_relative:../",
+            "--grpc-gateway_opt=generate_unbound_methods=true",
+            // "--openapiv2_out=logtostderr=true:../",
+            // "--openapiv2_opt=enums_as_ints=true:../",
+            // "--openapiv2_opt=allow_merge=true,merge_file_name=foo.json:../",
+            // 
+        ]
+    },
+}
